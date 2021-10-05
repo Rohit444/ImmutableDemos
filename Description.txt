@@ -1,3 +1,62 @@
 
 
 Immutable : Once the object is created we can not create change its start.
+
+
+
+String s = new String("Rohit"); // Right now s is pointing to heap memory
+
+String s = new String("Rohit").intern(); // Now it is pointing to String constant pool.
+
+
+** HashCode and Equals contract **
+
+By default every class is extending the Objects class hashcode method.
+And it declared as 
+
+public native int hashcode();
+
+The native methods are methods which are implemented in different language (C or C++). So Objects hascode() method is already implemented 
+in different language and here we are only using it. It is designed in such a way that it returns a unique number.
+
+
+Does hashcode() returned integer is the memory address of that object ?
+
+No, It is not exactly same memory address of an object.
+When we create an object at runtime it goes inside Heap memory an it is associated with a address a unique number.
+And the hash code is being calculated using this number.
+So the hashcode generated is by using the memory address but it is not exactly the memory address of that object.
+
+In java we never can see the memeory address of an object. It is internally managed by JVM.
+
+String class has overridden its own hashcode implementation.
+
+
+A good hascode() should return a distinct integer for each object, (as much possible).
+But you can't guaranty that the hashcode() method give integer can't be repeat for other objects.
+Two different objects can also have same hashcode value.
+
+If both the objects are equal the there hashcode value must be equal.
+But if two objects are having the same hashcode value they may or may not be equal.
+
+===========================================================================================================
+
+Objects class equals method implementation:
+
+  public boolean equals(Object obj) {
+        return (this == obj);
+    }
+    
+ If you see internally it is using == operator for comparing two objects. Checking references
+ 
+ String class overrides its own implementation of equals() method.
+ And internally it is not doing reference comparison it is doing content comparison.
+ 
+ So in this way we can override objects equals() method in our own class and write our own logic for content comparison.
+
+
+
+
+
+
+
